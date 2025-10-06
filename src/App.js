@@ -647,6 +647,19 @@ function App() {
       <div style={{ maxWidth: '56rem', margin: '0 auto' }}>
         <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold', color: '#78350f', marginBottom: '1.5rem' }}>About Golden Lotus Farms</h1>
         <div style={styles.formCard}>
+          <img 
+  src="/assets/photos/farmPhoto.png" 
+  alt="Our Farm" 
+  style={{ 
+    width: '100%', 
+    maxWidth: '800px',
+    height: 'auto',
+    margin: '1rem auto 2rem',
+    display: 'block',
+    borderRadius: '0.75rem',
+    boxShadow: '0 8px 16px rgba(0,0,0,0.2)'
+  }} 
+/>
           <p style={{ marginBottom: '1rem', fontSize: '1.125rem' }}>
             Golden Lotus Farms is a family-owned business dedicated to breeding and raising exceptional exotic chicken breeds. Founded in 2015, we've built a reputation for providing the highest quality hatching eggs to enthusiasts and breeders across the United States.
           </p>
@@ -659,6 +672,26 @@ function App() {
           <p>
             Whether you're starting your first exotic flock or adding to an established collection, Golden Lotus Farms is here to help you succeed. Thank you for choosing us as your trusted source for premium hatching eggs.
           </p>
+          <div style={{ marginTop: '1rem' }}>
+  <a 
+    href="https://www.facebook.com/golden.lotus.farms" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    style={{ 
+      color: '#78350f',
+      textDecoration: 'none',
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: '0.5rem',
+      fontSize: '1rem'
+    }}
+  >
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+    </svg>
+    Visit our Facebook page
+  </a>
+</div>
         </div>
       </div>
     </div>
@@ -684,6 +717,22 @@ function App() {
                   <span style={styles.cartBadge}>{cartCount}</span>
                 )}
               </button>
+              <a 
+  href="https://www.facebook.com/golden.lotus.farms" 
+  target="_blank" 
+  rel="noopener noreferrer"
+  style={{ 
+    color: 'white', 
+    textDecoration: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    padding: '0.5rem'
+  }}
+>
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+  </svg>
+</a>
             </div>
 
             <button style={{ ...styles.navButton, display: 'none' }} onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
@@ -760,10 +809,34 @@ function App() {
       {currentPage === 'checkout' && <CheckoutPage />}
       {currentPage === 'about' && <AboutPage />}
 
-      <footer style={styles.footer}>
-        <p style={{ marginBottom: '0.5rem' }}>&copy; 2025 Golden Lotus Farms. All rights reserved.</p>
-        <p style={{ fontSize: '0.875rem', color: '#fbbf24' }}>Shipping nationwide with care since 2015</p>
-      </footer>
+    <footer style={styles.footer}>
+  <p style={{ marginBottom: '0.5rem' }}>&copy; 2025 Golden Lotus Farms. All rights reserved.</p>
+  <p style={{ fontSize: '0.875rem', color: '#fbbf24', marginBottom: '1rem' }}>Shipping nationwide with care since 2015</p>
+  <a 
+    href="https://www.facebook.com/golden.lotus.farms" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    style={{ 
+      color: 'white',
+      textDecoration: 'none',
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: '0.5rem',
+      fontSize: '1rem',
+      padding: '0.5rem 1rem',
+      background: 'rgba(255,255,255,0.1)',
+      borderRadius: '0.5rem',
+      transition: 'background 0.2s'
+    }}
+    onMouseOver={(e) => e.target.style.background = 'rgba(255,255,255,0.2)'}
+    onMouseOut={(e) => e.target.style.background = 'rgba(255,255,255,0.1)'}
+  >
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+    </svg>
+    Follow us on Facebook
+  </a>
+</footer>
     </div>
   );
 }
