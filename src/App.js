@@ -415,7 +415,26 @@ function App() {
       padding: '2rem 1rem',
       marginTop: '3rem',
       textAlign: 'center'
-    }
+    },
+     mobileMenuButton: {
+    display: 'none',
+    background: 'none',
+    border: 'none',
+    color: 'white',
+    cursor: 'pointer',
+    padding: '0.5rem'
+  },
+  navLinksDesktop: {
+    display: 'flex',
+    gap: '1.5rem',
+    alignItems: 'center'
+  },
+  mobileMenu: {
+    display: 'none',
+    flexDirection: 'column',
+    gap: '1rem',
+    paddingBottom: '1rem'
+  }
   };
 
   const HomePage = () => (
@@ -843,40 +862,160 @@ function App() {
               <span>Golden Lotus Farms</span>
             </div>
             
-            <div style={{ ...styles.navLinks, '@media (max-width: 768px)': { display: mobileMenuOpen ? 'flex' : 'none' } }}>
-              <button style={styles.navButton} onClick={() => setCurrentPage('home')} onMouseOver={(e) => e.target.style.color = '#fbbf24'} onMouseOut={(e) => e.target.style.color = 'white'}>Home</button>
-              <button style={styles.navButton} onClick={() => setCurrentPage('products')} onMouseOver={(e) => e.target.style.color = '#fbbf24'} onMouseOut={(e) => e.target.style.color = 'white'}>Products</button>
-              <button style={styles.navButton} onClick={() => setCurrentPage('about')} onMouseOver={(e) => e.target.style.color = '#fbbf24'} onMouseOut={(e) => e.target.style.color = 'white'}>About</button>
-              <button style={styles.cartButton} onClick={() => setShowCart(!showCart)}>
-                <ShoppingCart size={24} />
-                {cartCount > 0 && (
-                  <span style={styles.cartBadge}>{cartCount}</span>
-                )}
-              </button>
-              <a 
-  href="https://www.facebook.com/golden.lotus.farms" 
-  target="_blank" 
-  rel="noopener noreferrer"
-  style={{ 
-    color: 'white', 
-    textDecoration: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    padding: '0.5rem'
+             {/* Desktop Navigation */}
+     <div 
+  className="nav-links-desktop"
+  style={{
+    ...styles.navLinksDesktop,
+    marginLeft: 'auto'  // This pushes it to the right!
   }}
 >
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-  </svg>
-</a>
-            </div>
+        <button 
+          style={styles.navButton} 
+          onClick={() => setCurrentPage('home')} 
+          onMouseOver={(e) => e.target.style.color = '#fbbf24'} 
+          onMouseOut={(e) => e.target.style.color = 'white'}
+        >
+          Home
+        </button>
+        <button 
+          style={styles.navButton} 
+          onClick={() => setCurrentPage('products')} 
+          onMouseOver={(e) => e.target.style.color = '#fbbf24'} 
+          onMouseOut={(e) => e.target.style.color = 'white'}
+        >
+          Products
+        </button>
+        <button 
+          style={styles.navButton} 
+          onClick={() => setCurrentPage('about')} 
+          onMouseOver={(e) => e.target.style.color = '#fbbf24'} 
+          onMouseOut={(e) => e.target.style.color = 'white'}
+        >
+          About
+        </button>
+        <button style={styles.cartButton} onClick={() => setShowCart(!showCart)}>
+          <ShoppingCart size={24} />
+          {cartCount > 0 && (
+            <span style={styles.cartBadge}>{cartCount}</span>
+          )}
+        </button>
+        <a 
+          href="https://www.facebook.com/golden.lotus.farms" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          style={{ 
+            color: 'white', 
+            textDecoration: 'none',
+            display: 'flex',
+            alignItems: 'center',
+            padding: '0.5rem'
+          }}
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+          </svg>
+        </a>
+      </div>
 
-            <button style={{ ...styles.navButton, display: 'none' }} onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
-        </div>
-      </nav>
+      {/* Mobile Menu Button */}
+      <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+        {/* Cart button visible on mobile */}
+        <button 
+          className="mobile-cart-button"
+          style={{ 
+            ...styles.cartButton,
+            display: 'none'
+          }} 
+          onClick={() => setShowCart(!showCart)}
+        >
+          <ShoppingCart size={24} />
+          {cartCount > 0 && (
+            <span style={styles.cartBadge}>{cartCount}</span>
+          )}
+        </button>
+        
+        <button
+          className="mobile-menu-button"
+          style={styles.mobileMenuButton}
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        >
+          {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+        </button>
+      </div>
+    </div>
+
+    {/* Mobile Menu Dropdown */}
+    {mobileMenuOpen && (
+      <div 
+        className="mobile-menu-open"
+        style={styles.mobileMenu}
+      >
+        <button 
+          style={{ 
+            ...styles.navButton, 
+            width: '100%', 
+            textAlign: 'left',
+            padding: '0.75rem 0'
+          }} 
+          onClick={() => { 
+            setCurrentPage('home'); 
+            setMobileMenuOpen(false); 
+          }}
+        >
+          Home
+        </button>
+        <button 
+          style={{ 
+            ...styles.navButton, 
+            width: '100%', 
+            textAlign: 'left',
+            padding: '0.75rem 0'
+          }} 
+          onClick={() => { 
+            setCurrentPage('products'); 
+            setMobileMenuOpen(false); 
+          }}
+        >
+          Products
+        </button>
+        <button 
+          style={{ 
+            ...styles.navButton, 
+            width: '100%', 
+            textAlign: 'left',
+            padding: '0.75rem 0'
+          }} 
+          onClick={() => { 
+            setCurrentPage('about'); 
+            setMobileMenuOpen(false); 
+          }}
+        >
+          About
+        </button>
+        <a 
+          href="https://www.facebook.com/golden.lotus.farms" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          style={{ 
+            color: 'white', 
+            textDecoration: 'none',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            padding: '0.75rem 0'
+          }}
+          onClick={() => setMobileMenuOpen(false)}
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+          </svg>
+          Facebook
+        </a>
+      </div>
+    )}
+  </div>
+</nav>
 
       {showCart && (
         <div style={styles.cartOverlay} onClick={() => setShowCart(false)}>
