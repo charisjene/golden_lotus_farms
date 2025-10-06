@@ -58,8 +58,32 @@ const products = [
   }
 ];
 
+const carouselImages = [
+  {
+    id: 1,
+    url: "/assets/photos/farmPhoto.png",
+    alt: "farm owner with donkeys"
+  },
+  {
+    id: 2,
+    url: "/assets/photos/blackChicks.png",
+    alt: "chicks with eggs"
+  },
+  {
+    id: 3,
+    url: "/assets/photos/farmerAndBaby.png",
+    alt: "farm owner with baby"
+  },
+  {
+    id: 4,
+    url: "assets/photos/2eggs.png",
+    alt: "eggs"
+  }
+];
+
 function App() {
   const [cart, setCart] = useState([]);
+  const [currentSlide, setCurrentSlide] = useState(0);
   const [showCart, setShowCart] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState('home');
@@ -642,24 +666,136 @@ function App() {
     </div>
   );
 
+  const Carousel = () => {
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + carouselImages.length) % carouselImages.length);
+  };
+
+  const goToSlide = (index) => {
+    setCurrentSlide(index);
+  };
+
+  return (
+    <div style={{ 
+      position: 'relative', 
+      width: '100%', 
+      maxWidth: '800px', 
+      margin: '0 auto 2rem',
+      borderRadius: '0.5rem',
+      overflow: 'hidden',
+      boxShadow: '0 4px 12px rgba(0,0,0,0.15)'
+    }}>
+      {/* Main Image */}
+      <div style={{ position: 'relative', height: '400px' }}>
+        <img 
+          src={carouselImages[currentSlide].url} 
+          alt={carouselImages[currentSlide].alt}
+          style={{ 
+            width: '100%', 
+            height: '100%', 
+            objectFit: 'cover',
+            transition: 'opacity 0.5s ease-in-out'
+          }}
+        />
+        
+        {/* Previous Button */}
+        <button
+          onClick={prevSlide}
+          style={{
+            position: 'absolute',
+            left: '1rem',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            background: 'rgba(255,255,255,0.9)',
+            border: 'none',
+            borderRadius: '50%',
+            width: '40px',
+            height: '40px',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '1.5rem',
+            fontWeight: 'bold',
+            color: '#78350f',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+            transition: 'background 0.2s'
+          }}
+          onMouseOver={(e) => e.target.style.background = 'white'}
+          onMouseOut={(e) => e.target.style.background = 'rgba(255,255,255,0.9)'}
+        >
+          ‹
+        </button>
+
+        {/* Next Button */}
+        <button
+          onClick={nextSlide}
+          style={{
+            position: 'absolute',
+            right: '1rem',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            background: 'rgba(255,255,255,0.9)',
+            border: 'none',
+            borderRadius: '50%',
+            width: '40px',
+            height: '40px',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '1.5rem',
+            fontWeight: 'bold',
+            color: '#78350f',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+            transition: 'background 0.2s'
+          }}
+          onMouseOver={(e) => e.target.style.background = 'white'}
+          onMouseOut={(e) => e.target.style.background = 'rgba(255,255,255,0.9)'}
+        >
+          ›
+        </button>
+      </div>
+
+      {/* Dots Navigation */}
+      <div style={{ 
+        position: 'absolute', 
+        bottom: '1rem', 
+        left: '50%', 
+        transform: 'translateX(-50%)',
+        display: 'flex',
+        gap: '0.5rem'
+      }}>
+        {carouselImages.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => goToSlide(index)}
+            style={{
+              width: '12px',
+              height: '12px',
+              borderRadius: '50%',
+              border: '2px solid white',
+              background: currentSlide === index ? 'white' : 'transparent',
+              cursor: 'pointer',
+              transition: 'all 0.3s'
+            }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
   const AboutPage = () => (
     <div style={styles.section}>
       <div style={{ maxWidth: '56rem', margin: '0 auto' }}>
         <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold', color: '#78350f', marginBottom: '1.5rem' }}>About Golden Lotus Farms</h1>
         <div style={styles.formCard}>
-          <img 
-  src="/assets/photos/farmPhoto.png" 
-  alt="Our Farm" 
-  style={{ 
-    width: '100%', 
-    maxWidth: '800px',
-    height: 'auto',
-    margin: '1rem auto 2rem',
-    display: 'block',
-    borderRadius: '0.75rem',
-    boxShadow: '0 8px 16px rgba(0,0,0,0.2)'
-  }} 
-/>
+           <Carousel />
           <p style={{ marginBottom: '1rem', fontSize: '1.125rem' }}>
             Golden Lotus Farms is a family-owned business dedicated to breeding and raising exceptional exotic chicken breeds. Founded in 2015, we've built a reputation for providing the highest quality hatching eggs to enthusiasts and breeders across the United States.
           </p>
