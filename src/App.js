@@ -470,9 +470,9 @@ function App() {
 
       <div style={styles.section}>
         <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-          <h2 style={styles.sectionTitle}>Why Choose Golden Lotus Farms?</h2>
-          <div style={styles.grid}>
-            <div style={styles.featureCard}>
+      <h2 style={styles.sectionTitle}>Why Choose Golden Lotus Farms?</h2>
+<div className="features-grid">
+  <div style={styles.featureCard}>
               <div style={styles.featureIcon}>
                 <Package style={{ color: '#d97706' }} size={32} />
               </div>
